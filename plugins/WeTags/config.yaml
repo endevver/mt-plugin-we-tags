@@ -1,0 +1,17 @@
+name: WeTags
+description: Content tagging for external users of the community pack
+version: 0.1
+
+config_settings:
+  WeTagsLoginRequired:
+    default: 1
+
+object_types:
+  objecttag:
+    external: integer
+
+applications:
+  community:
+    methods:
+      add_tag: $WeTags::WeTags::Community::add_tag
+
