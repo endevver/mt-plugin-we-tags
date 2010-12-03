@@ -1,5 +1,5 @@
 
-package WeTags::Community;
+package WeTags::Comments;
 
 use strict;
 use warnings;
@@ -8,26 +8,14 @@ sub __result {
     my $app = shift;
     my ($results) = @_;
 
-    my $jsonp = $app->param('jsonp');
-    if ($jsonp) {
-        $app->jsonp_result( $results, $jsonp );
-    }
-    else {
-        $app->json_result($results);
-    }
+    $app->json_result($results);
 }
 
 sub __error {
     my $app = shift;
     my ($msg) = @_;
 
-    my $jsonp = $app->param('jsonp');
-    if ($jsonp) {
-        return $app->jsonp_error( $msg, $jsonp );
-    }
-    else {
-        return $app->json_error($msg);
-    }
+    return $app->json_error($msg);
 }
 
 sub add_tag {
@@ -35,7 +23,7 @@ sub add_tag {
 
     my $jsonp = $app->param('jsonp');
 
-    my $user = $app->_login_user_commenter();
+    my ( $sess_obj, $user ) = $app->get_commenter_session();
     return __error( $app, "Login required" )
         if ( $app->config->WeTagsLoginRequired && !$user );
 
@@ -57,7 +45,7 @@ sub add_tag {
     $obj->save
         or return __error( $app, "Error saving object: " . $obj->errstr );
 
-    return { message => 'Success', tag_added => $tag };
+    return __result( $app, { message => 'Success', tag_added => $tag } );
 }
 
 1;
