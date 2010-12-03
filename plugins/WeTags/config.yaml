@@ -11,7 +11,7 @@ object_types:
     external: integer
 
 applications:
-  community:
+  comments:
     methods:
       add_tag: $WeTags::WeTags::Community::add_tag
 
