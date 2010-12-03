@@ -13,5 +13,5 @@ object_types:
 applications:
   comments:
     methods:
-      add_tag: $WeTags::WeTags::Community::add_tag
+      add_tag: $WeTags::WeTags::Comments::add_tag
 

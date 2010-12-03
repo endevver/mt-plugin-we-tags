@@ -21,13 +21,7 @@ sub __error {
 sub add_tag {
     my $app = shift;
 
-    my $jsonp = $app->param('jsonp');
-
-    my ( $sess_obj, $user ) = $app->get_commenter_session();
-    return __error( $app, "Login required" )
-        if ( $app->config->WeTagsLoginRequired && !$user );
-
-    my $type = $app->param('_type') && 'entry';
+    my $type = $app->param('_type') || 'entry';
     my $id   = $app->param('id');
     my $tag  = $app->param('tag');
 
@@ -40,6 +34,13 @@ sub add_tag {
     return __error( $app, "Object not found" ) unless $obj;
     return __error( $app, "Object not taggable" )
         unless $obj->can('add_tags');
+
+    $app->param( 'blog_id', $obj->blog_id )
+        if ( !$app->param('blog_id') && $obj->can('blog_id') );
+
+    my ( $sess_obj, $user ) = $app->get_commenter_session();
+    return __error( $app, "Login required" )
+        if ( $app->config->WeTagsLoginRequired && !$user );
 
     $obj->add_tags($tag);
     $obj->save
