@@ -15,9 +15,9 @@ None
 
 None
 
-## Community Pack changes
+## Comments application changes
 
-Added add_tags method.  Takes _type (defaults to 'entry'), id and tag arguments.  Returns either JSON or JSONP call (if passed a jsonp argument).  On success returns:
+Added add_tags method.  Takes _type (defaults to 'entry'), id and tag arguments.  Returns JSON.  On success returns:
 
  
 
