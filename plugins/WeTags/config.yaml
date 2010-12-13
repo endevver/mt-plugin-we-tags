@@ -6,10 +6,6 @@ config_settings:
   WeTagsLoginRequired:
     default: 1
 
-object_types:
-  objecttag:
-    external: integer
-
 applications:
   comments:
     methods:
