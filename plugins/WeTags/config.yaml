@@ -5,6 +5,8 @@ version: 1.0.2
 config_settings:
   WeTagsLoginRequired:
     default: 1
+  WeTagsRebuildEntries:
+    default: 1
 
 applications:
   comments:

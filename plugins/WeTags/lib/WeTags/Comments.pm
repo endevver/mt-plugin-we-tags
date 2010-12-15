@@ -46,6 +46,17 @@ sub add_tag {
     $obj->save
         or return __error( $app, "Error saving object: " . $obj->errstr );
 
+    if ( $type eq 'entry' && $app->config->WeTagsRebuildEntries ) {
+        require MT::Util;
+
+        # we should rebuild it
+        MT::Util::start_background_task(
+            sub {
+                $app->rebuild_entry( Entry => $obj );
+            }
+        );
+    }
+
     return __result( $app, { message => 'Success', tag_added => $tag } );
 }
 
