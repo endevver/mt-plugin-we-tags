@@ -52,7 +52,13 @@ sub add_tag {
         # we should rebuild it
         MT::Util::start_background_task(
             sub {
-                $app->rebuild_entry( Entry => $obj );
+                $app->rebuild_entry(
+                    Entry => $obj,
+                    (   $app->config->WeTagsRebuildIndexes
+                        ? ( BuildIndexes => 1 )
+                        : ()
+                    )
+                );
             }
         );
     }

@@ -7,6 +7,8 @@ config_settings:
     default: 1
   WeTagsRebuildEntries:
     default: 1
+  WeTagsRebuildIndexes:
+    default: 1
 
 applications:
   comments:
