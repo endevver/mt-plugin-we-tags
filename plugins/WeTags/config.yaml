@@ -1,6 +1,6 @@
 name: WeTags
 description: Content tagging for external users of the community pack
-version: 1.2.0
+version: v1.2.1
 
 config_settings:
   WeTagsLoginRequired:
